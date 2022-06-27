@@ -1,0 +1,12 @@
+proxmox_vm_template = "cp-base-template" # needs to match the NAME of the template. Lookup is done by name, not ID !
+network_bridge = "vmbr1"
+
+zk-count = 1
+broker-count = 1
+connect-count = 1
+schema-count = 1
+rest-count = 1
+ksql-count = 1
+c3-count = 1
+
+ssh_key = "<you pubkey from ~/.ssh/id_rsa.pub here !>"

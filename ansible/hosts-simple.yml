@@ -1,0 +1,67 @@
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ubuntu 
+    ansible_become: true
+
+### Broker
+    kafka_broker_custom_properties:
+
+    ### Schema Registry
+    schema_registry_custom_properties:
+
+    ## Connect
+    kafka_connect_custom_properties:
+
+    ### Control Center
+    control_center_custom_properties:
+
+    ### REST
+    kafka_rest_custom_properties:
+
+    ### KSQL
+    ksql_custom_properties:
+
+zookeeper:
+  hosts:
+    cp-zk-0.homelab.internal:
+    
+kafka_broker:
+  hosts:
+    cp-broker-0.homelab.internal:
+
+schema_registry:
+  hosts:
+    cp-schema-0.homelab.internal:
+
+kafka_rest:
+  hosts:
+    cp-rest-0.homelab.internal:
+    
+ksql:
+  hosts:
+    cp-ksql-0.homelab.internal:
+
+kafka_connect:
+  hosts:
+    cp-connect-0.homelab.internal:
+
+  vars:
+    kafka_connect_confluent_hub_plugins:
+      - confluentinc/kafka-connect-datagen:0.5.3
+    # kafka_connect_connectors:
+    #   - name: datagen-pageviews
+    #     config:
+    #      connector.class: "io.confluent.kafka.connect.datagen.DatagenConnector"
+    #      kafka.topic: "pageviews"
+    #      quickstart: "pageviews"
+    #      key.converter: "org.apache.kafka.connect.storage.StringConverter"
+    #      value.converter: "io.confluent.connect.avro.AvroConverter"
+    #      value.converter.schema.registry.url: "http://cp-schema-0:8081"
+    #      max.interval: 100
+    #      iterations: 10000000
+    #      tasks.max: "1"
+
+control_center:
+  hosts:
+    cp-c3-0.homelab.internal:

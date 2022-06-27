@@ -1,0 +1,9 @@
+# BEGIN CP
+10.0.0.30 cp-zk-0.homelab.internal cp-zk-0
+10.0.0.40 cp-broker-0.homelab.internal cp-broker-0
+10.0.0.50 cp-schema-0.homelab.internal cp-schema-0
+10.0.0.60 cp-rest-0.homelab.internal cp-rest-0
+10.0.0.70 cp-ksql-0.homelab.internal cp-ksql-0
+10.0.0.80 cp-connect-0.homelab.internal cp-connect-0
+10.0.0.90 cp-c3-0.homelab.internal cp-c3-0
+# END CP
