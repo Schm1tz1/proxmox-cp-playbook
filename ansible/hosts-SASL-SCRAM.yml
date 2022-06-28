@@ -21,6 +21,18 @@ all:
     zookeeper_client_authentication_type: mtls
     zookeeper_quorum_authentication_type: none
 
+    # Basic Security for C3
+    control_center_authentication_type: basic
+    control_center_basic_users:
+      admin:
+        principal: 'root'
+        password: 'toor'
+        roles: 'admin'
+      test:
+        principal: 'admin'
+        password: 'nimda'
+        roles: 'admin,Restricted'
+
     # SASL SCRAM config
     mask_secrets: false
     sasl_protocol: scram
