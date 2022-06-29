@@ -1,0 +1,87 @@
+all:
+  vars:
+    ansible_connection: ssh
+    ansible_user: ubuntu 
+    ansible_become: true
+
+    # mTLS config
+    ssl_enabled: true
+    ssl_mutual_auth_enabled: true
+    ssl_provided_keystore_and_truststore: true
+    regenerate_keystore_and_truststore: true
+    ssl_keystore_filepath: "/root/workspace/cp-proxmox-playbook/certs/{{inventory_hostname}}.keystore.jks"
+    ssl_keystore_key_password: changeme
+    ssl_keystore_store_password: changeme
+    ssl_truststore_filepath: "/root/workspace/cp-proxmox-playbook/certs/truststore.jks"
+    ssl_truststore_ca_cert_alias: caroot
+    ssl_truststore_password: changeme
+    
+    zookeeper_ssl_enabled: true
+    zookeeper_client_authentication_type: mtls
+    zookeeper_quorum_authentication_type: none
+
+    ### Broker
+    kafka_broker_custom_properties:
+      authorizer.class.name: kafka.security.authorizer.AclAuthorizer
+      ssl.principal.mapping.rules: RULE:^.*[Cc][Nn]=([a-zA-Z0-9._-]*).*$/$1/L,DEFAULT
+      super.users: "User:cp-broker-0.homelab.internal"
+      confluent.license: "{{ confluent_license }}"
+
+    ### Schema Registry
+    schema_registry_custom_properties:
+
+    ## Connect
+    kafka_connect_custom_properties:
+
+    ### Control Center
+    control_center_custom_properties:
+
+    ### REST
+    kafka_rest_custom_properties:
+
+    ### KSQL
+    ksql_custom_properties:
+
+zookeeper:
+  hosts:
+    cp-zk-0:
+    
+kafka_broker:
+  hosts:
+    cp-broker-0:
+
+schema_registry:
+  hosts:
+    cp-schema-0:
+
+kafka_rest:
+  hosts:
+    cp-rest-0:
+    
+ksql:
+  hosts:
+    cp-ksql-0:
+
+kafka_connect:
+  hosts:
+    cp-connect-0:
+
+  vars:
+    kafka_connect_confluent_hub_plugins:
+      - confluentinc/kafka-connect-datagen:0.5.3
+    # kafka_connect_connectors:
+    #   - name: datagen-pageviews
+    #     config:
+    #      connector.class: "io.confluent.kafka.connect.datagen.DatagenConnector"
+    #      kafka.topic: "pageviews"
+    #      quickstart: "pageviews"
+    #      key.converter: "org.apache.kafka.connect.storage.StringConverter"
+    #      value.converter: "io.confluent.connect.avro.AvroConverter"
+    #      value.converter.schema.registry.url: "http://cp-schema-0:8081"
+    #      max.interval: 100
+    #      iterations: 10000000
+    #      tasks.max: "1"
+
+control_center:
+  hosts:
+    cp-c3-0:
