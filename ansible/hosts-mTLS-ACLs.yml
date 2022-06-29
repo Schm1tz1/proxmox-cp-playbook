@@ -1,6 +1,5 @@
 all:
   vars:
-    confluent_license:
     ansible_connection: ssh
     ansible_user: ubuntu 
     ansible_become: true
@@ -21,55 +20,12 @@ all:
     zookeeper_client_authentication_type: mtls
     zookeeper_quorum_authentication_type: none
 
-    # Basic Security for C3
-    control_center_authentication_type: basic
-    control_center_basic_users:
-      admin:
-        principal: 'root'
-        password: 'toor'
-        roles: 'admin'
-      test:
-        principal: 'admin'
-        password: 'nimda'
-        roles: 'admin,Restricted'
-
-    # SASL SCRAM config
-    mask_secrets: false
-    sasl_protocol: scram
-    sasl_scram_users:
-      admin:
-        principal: 'kafka'
-        password: 'kafka#secret!'
-      schema_registry:
-        principal: 'schema-registry'
-        password: 'schema-registry#secret!'
-      kafka_connect:
-        principal: 'kafka-connect'
-        password: 'kafka-connect#secret!'
-      ksql:
-        principal: 'ksqldb'
-        password: 'ksqldb#secret!'
-      kafka_rest:
-        principal: 'kafka_rest'
-        password: 'kafka_rest#secret!'
-      control_center:
-        principal: 'control-center'
-        password: 'control-center#secret!'
-      kafka_connect_replicator:
-        principal: 'kafka_connect_replicator'
-        password: 'kafka_connect_replicator#secret!'
-      client:
-        principal: 'client'
-        password: 'client#secret!'
-      schm1tz1:
-        principal: 'schm1tz1'
-        password: 'schm1tz1#secret!'
-
-
     ### Broker
     kafka_broker_custom_properties:
       authorizer.class.name: kafka.security.authorizer.AclAuthorizer
-      super.users: "User:kafka"
+      ssl.principal.mapping.rules: RULE:^.*[Cc][Nn]=([a-zA-Z0-9._-]*).*$/$1/L,DEFAULT
+      super.users: "User:cp-broker-0.homelab.internal"
+      confluent.license: "{{ confluent_license }}"
 
     ### Schema Registry
     schema_registry_custom_properties:
