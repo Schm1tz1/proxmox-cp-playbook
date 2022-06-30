@@ -1,4 +1,4 @@
-proxmox_vm_template = "cp-base-template" # needs to match the NAME of the template. Lookup is done by name, not ID !
+proxmox_vm_template = "ubuntu-base-template" # needs to match the NAME of the template. Lookup is done by name, not ID !
 network_bridge = "vmbr1"
 
 zk-count = 1

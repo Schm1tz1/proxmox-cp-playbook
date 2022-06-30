@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-qm create 9000 --memory 2048 --net0 virtio,bridge=vmbr1 --name cp-base-template
+qm create 9000 --memory 2048 --net0 virtio,bridge=vmbr1 --name ubuntu-base-template
 
 # latest supported version: Ubuntu 20
 qm importdisk 9000 /root/img/focal-server-cloudimg-amd64.img local-zfs
