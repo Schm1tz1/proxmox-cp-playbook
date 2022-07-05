@@ -1,5 +1,5 @@
 resource "proxmox_vm_qemu" "broker" {
-  count        = var.zk-count
+  count        = var.broker-count
   name         = "cp-broker-${count.index}"
   vmid         = "374${count.index}"
   desc         = "CP Broker Node ${count.index}"
